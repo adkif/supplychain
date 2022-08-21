@@ -1,0 +1,44 @@
+<div class="main">
+  <app-plus
+    *ngIf="!sets.length"
+    [routerLink]="['add']"
+    message="Start Create your supply chain"
+  ></app-plus>
+  <ng-container *ngFor="let set of sets">
+    <div class="card">
+      <div class="card-header">
+        <h2>{{ set.name }}</h2>
+      </div>
+      <div class="card-body">
+        <ng-container
+          *ngFor="let manufacturingTechnology of set.manufacturingTechnologies"
+        >
+          <div class="node-container">
+            <div class="node">{{ manufacturingTechnology.label }}</div>
+            <ng-container *ngFor="let item of manufacturingTechnology.items">
+              <ng-container
+                class="node-container"
+                *ngIf="set.name === item?.parent?.name"
+              >
+                <div *ngFor="let node of item?.nodes">
+                  {{ node.label }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+          <app-plus
+            [routerLink]="['add-item']"
+            [queryParams]="{
+              nodeId: manufacturingTechnology.id,
+              parentName: set.name
+            }"
+            message="Add Item"
+          ></app-plus>
+        </ng-container>
+      </div>
+      <div class="card-footer"></div>
+    </div>
+  </ng-container>
+  <app-plus *ngIf="sets.length > 0" [routerLink]="['add']"></app-plus>
+</div>
+

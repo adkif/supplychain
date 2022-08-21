@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  width: 450px;
+  border: 2px solid black;
+  padding: 8px;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 0;
+    .node-container {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      .node {
+        border-radius: 8px;
+        width: 100px;
+        background-color: orange;
+        padding: 4px;
+        border: 2px solid black;
+      }
+    }
+  }
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

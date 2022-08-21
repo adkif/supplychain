@@ -1,0 +1,40 @@
+<div class="main">
+  <div class="menu">
+    <div class="header">
+      <ul>
+        <li>Factory name:</li>
+        <li>Quantity:</li>
+        <li>Duration:</li>
+        <li>Delivery Terms:</li>
+        <li>Delivery To:</li>
+        <li>lot Size:</li>
+      </ul>
+    </div>
+    <div class="body">
+      <h2>BOOM💥</h2>
+      <p>Main Item</p>
+      <ul>
+        <li>Item</li>
+        <li>
+          Item
+          <ul>
+            <li>Item</li>
+            <li>Item</li>
+          </ul>
+        </li>
+        <li>
+          Item
+          <ul>
+            <li>Item</li>
+          </ul>
+        </li>
+      </ul>
+      <hr />
+      <h3>Included ManTechs</h3>
+      <ng-container *ngFor="let node of nodes">
+        <div>{{ node.label }}</div>
+      </ng-container>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

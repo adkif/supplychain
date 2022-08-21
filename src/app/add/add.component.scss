@@ -1,0 +1,21 @@
+.main {
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .save {
+    background-color: orange;
+    padding: 4px;
+    border: unset;
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+}
+
+:host {
+  height: 100%;
+  width: 100%;
+}

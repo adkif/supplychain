@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  align-items: flex-start;
+  height: calc(100vh - 2rem);
+  margin: 1rem;
+  border: 2px solid black;
+  .menu {
+    background-color: gainsboro;
+    height: 100%;
+    border-right: 2px solid black;
+    width: 25%;
+    .header {
+      background-color: bisque;
+      padding: 8px;
+      border-bottom: 2px solid black;
+      ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+          text-decoration: none;
+        }
+      }
+    }
+    .body {
+      padding: 8px;
+    }
+  }
+}
