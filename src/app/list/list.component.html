@@ -45,7 +45,7 @@
     <app-plus *ngIf="sets.length > 0" [routerLink]="['add']"></app-plus>
   </ng-container>
   <button *ngIf="sets.length > 0" class="button" (click)="buildGradph()">
-    Build 🔨
+  {{ showGraph ? 'go 🔙' : ' Build 🔨'}} 
   </button>
   <ngx-graph
     *ngIf="showGraph"
