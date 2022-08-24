@@ -3,6 +3,7 @@
   padding: 8px;
   display: flex;
   gap: 8px;
+  position: relative;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -19,6 +20,18 @@
       align-items: flex-start;
     }
   }
+}
+
+.button {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  padding: 8px;
+  background-color: gainsboro;
+  border: unset;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
 }
 
 :host {

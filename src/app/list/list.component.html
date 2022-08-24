@@ -4,41 +4,126 @@
     [routerLink]="['add']"
     message="Start Create your supply chain"
   ></app-plus>
-  <ng-container *ngFor="let set of sets">
-    <div class="card">
-      <div class="card-header">
-        <h2>{{ set.name }}</h2>
+  <ng-container *ngIf="!showGraph"
+    ><ng-container *ngFor="let set of sets">
+      <div class="card">
+        <div class="card-header">
+          <h2>{{ set.name }}</h2>
+        </div>
+        <div class="card-body">
+          <ng-container
+            *ngFor="
+              let manufacturingTechnology of set.manufacturingTechnologies
+            "
+          >
+            <div class="node-container">
+              <div class="node">{{ manufacturingTechnology.label }}</div>
+              <ng-container *ngFor="let item of manufacturingTechnology.items">
+                <ng-container
+                  class="node-container"
+                  *ngIf="set.name === item?.parent?.name"
+                >
+                  <div *ngFor="let node of item?.nodes">
+                    {{ node.label }}
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+            <app-plus
+              [routerLink]="['add-item']"
+              [queryParams]="{
+                nodeId: manufacturingTechnology.id,
+                parentName: set.name
+              }"
+              message="Add Item"
+            ></app-plus>
+          </ng-container>
+        </div>
+        <div class="card-footer"></div>
       </div>
-      <div class="card-body">
-        <ng-container
-          *ngFor="let manufacturingTechnology of set.manufacturingTechnologies"
-        >
-          <div class="node-container">
-            <div class="node">{{ manufacturingTechnology.label }}</div>
-            <ng-container *ngFor="let item of manufacturingTechnology.items">
+    </ng-container>
+    <app-plus *ngIf="sets.length > 0" [routerLink]="['add']"></app-plus>
+  </ng-container>
+  <button *ngIf="sets.length > 0" class="button" (click)="buildGradph()">
+    Build 🔨
+  </button>
+  <ngx-graph
+    *ngIf="showGraph"
+    [links]="links"
+    [showMiniMap]="true"
+    [nodes]="nodes"
+    (select)="onSelect($event)"
+    [update$]="update$"
+  >
+    <ng-template #defsTemplate>
+      <svg:marker
+        id="arrow"
+        viewBox="0 -5 10 10"
+        refX="8"
+        refY="0"
+        markerWidth="4"
+        markerHeight="4"
+        orient="auto"
+      >
+        <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+      </svg:marker>
+    </ng-template>
+
+    <ng-template #nodeTemplate let-node>
+      <svg:g class="card">
+        <svg:foreignObject width="350" height="150">
+          <div class="card">
+            <div class="card-header">
+              <h2>{{ node.data.setName }}</h2>
+            </div>
+            <div class="card-body">
               <ng-container
-                class="node-container"
-                *ngIf="set.name === item?.parent?.name"
+                *ngFor="
+                  let manufacturingTechnology of node.data
+                    .manufacturingTechnologies
+                "
               >
-                <div *ngFor="let node of item?.nodes">
-                  {{ node.label }}
+                <div class="node-container">
+                  <div class="node">{{ manufacturingTechnology.label }}</div>
+                  <ng-container
+                    *ngFor="let item of manufacturingTechnology.items"
+                  >
+                    <ng-container
+                      class="node-container"
+                      *ngIf="node.data.setName === item?.parent?.name"
+                    >
+                      <div *ngFor="let nod of item?.nodes">
+                        {{ nod.label }}
+                      </div>
+                    </ng-container>
+                  </ng-container>
                 </div>
               </ng-container>
-            </ng-container>
+            </div>
+            <div class="card-footer"></div>
           </div>
-          <app-plus
-            [routerLink]="['add-item']"
-            [queryParams]="{
-              nodeId: manufacturingTechnology.id,
-              parentName: set.name
-            }"
-            message="Add Item"
-          ></app-plus>
-        </ng-container>
-      </div>
-      <div class="card-footer"></div>
-    </div>
-  </ng-container>
-  <app-plus *ngIf="sets.length > 0" [routerLink]="['add']"></app-plus>
-</div>
+        </svg:foreignObject>
+      </svg:g>
+    </ng-template>
 
+    <ng-template #linkTemplate let-link>
+      <svg:g class="edge">
+        <svg:path
+          class="line"
+          stroke-width="2"
+          marker-end="url(#arrow)"
+        ></svg:path>
+        <svg:text class="edge-label" text-anchor="middle">
+          <textPath
+            class="text-path"
+            [attr.href]="link.id"
+            [style.dominant-baseline]="link.dominantBaseline"
+            startOffset="50%"
+          >
+            {{ link.label }}
+          </textPath>
+        </svg:text>
+      </svg:g>
+    </ng-template>
+  </ngx-graph>
+</div>
