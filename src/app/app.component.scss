@@ -26,3 +26,31 @@
     }
   }
 }
+@media only screen and (max-width: 1200px) {
+  .main {
+    display: flex;
+    margin: 1rem;
+    border: 2px solid black;
+    flex-direction: column;
+    .menu {
+      background-color: gainsboro;
+      height: 100%;
+      width: 100%;
+      border-right: none;
+      .header {
+        background-color: bisque;
+        padding: 8px;
+        ul {
+          list-style-type: none;
+          padding: 0;
+          li {
+            text-decoration: none;
+          }
+        }
+      }
+      .body {
+        padding: 8px;
+      }
+    }
+  }
+}
