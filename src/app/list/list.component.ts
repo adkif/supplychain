@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Node } from '@swimlane/ngx-graph';
-import { BehaviorSubject, Subject, tap } from 'rxjs';
+import { Subject } from 'rxjs';
 import { DataService, NodeSet } from '../services/data.service';
 
 @Component({
