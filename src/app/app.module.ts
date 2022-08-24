@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { AddComponent } from './add/add.component';
@@ -23,7 +24,8 @@ import { AddItemComponent } from './add-item/add-item.component';
     AppRoutingModule,
     NgxGraphModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
